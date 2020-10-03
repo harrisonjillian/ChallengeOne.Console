@@ -12,8 +12,6 @@ namespace ChallengeTwo_Console
         public Queue<Claim> _claims = new Queue<Claim>();
 
 
-
-
         //Add New Claims
         public void AddNewClaims(Claim newClaim)
         {
@@ -21,9 +19,7 @@ namespace ChallengeTwo_Console
         }
 
 
-   
         //Delete New Claims
-
         public void DeleteClaim()
         {
             _claims.Dequeue();
@@ -35,33 +31,24 @@ namespace ChallengeTwo_Console
             //Declaring an instance of a claim that is the next claim in your _claims
             Claim nextClaim = _claims.Peek();
             return nextClaim;
-         
         }
 
 
-
-
-        //Get All Claims
-
-        public Queue<Claim> GetAllClaims()
-        {
-            return _claims;
-        }
-
-
-
-        //SeeAllClaimInformation
+        //See All Claim Information
         public Claim SeeAllClaimInformation()
         {
             foreach (Claim claim in _claims)
             {
-                Console.WriteLine($"{claim.ClaimID}, {claim.TypeOfClaim}, {claim.ClaimDescription}, {claim.ClaimAmount}, {claim.IncidentDate}, {claim.ClaimDate}, {claim.IsValid}");
+                Console.WriteLine($"{claim.ClaimID}, {claim.TypeOfClaim}, {claim.ClaimDescription}, {claim.ClaimAmount}, {claim.IncidentDate}, {claim.ClaimDate}, {claim.IsValid} \n");
             }
             return null;
-
         }
 
-
+        // Get All Claims
+        public Queue<Claim> GetAllClaims()
+        {
+            return _claims;
+        }
 
         public Claim GetClaimsByClaimID(int claimID)
         {
@@ -75,7 +62,7 @@ namespace ChallengeTwo_Console
             return null;
         }
 
-        //UpdateClaimsbyClaim ID
+        // UpdateClaimsbyClaim ID
         public bool UpdateClaimsByClaimID(int claimID, string claimDescription, decimal claimAmount, DateTime incidentDate, DateTime claimDate, bool isValid, ClaimType typeOfClaim)
         {
             Claim newClaimToBeUpdated = GetClaimsByClaimID(claimID);
@@ -98,7 +85,7 @@ namespace ChallengeTwo_Console
             }
         }
 
-        
+
 
 
 

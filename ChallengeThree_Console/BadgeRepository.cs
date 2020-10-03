@@ -21,28 +21,72 @@ namespace ChallengeThree_Console
             badgeDictionary.Add(badgeID, newBadge);
         }
 
+        // View All Badges
 
-        //Update Doors on Existing Badge --- HOW TO ADD DICTIONARY??
-
-        public bool UpdateDoorOnBadge(int badgeID, List<string> doorNames)
+        public List<Badge> ViewAll()
         {
-            Badge toBeUpdated = GetBadgeByID(badgeID);
-            if (toBeUpdated != null)
+            List<Badge> listOfBadges = new List<Badge>();
+            foreach (KeyValuePair<int, Badge> badge in badgeDictionary)
             {
-                toBeUpdated.DoorNames = doorNames;
-                return true;
+                listOfBadges.Add(badge.Value);
+            }
+            return listOfBadges;
+        }
 
+        // Add Door to Badge
+
+        public bool AddDoorToBadge(string doorName, int badgeID)
+        {
+            Badge addDoor = GetBadgeByID(badgeID);
+
+            if(GetBadgeByID(badgeID) == null)
+            {
+                return false;
             }
             else
+            {
+                addDoor.DoorNames.Add(doorName);
+                return true;
+            }
+        }
+
+        public List<string> GetDoorsByList(int badgeID)
+        {
+            Badge seeDoors = GetBadgeByID(badgeID);
+            if (seeDoors == null)
+            {
+                return null;
+            }
+            else
+            {
+                return seeDoors.DoorNames;
+            }
+        }
+
+
+        // Delete Doors on Existing Badge 
+        public bool DeleteDoorFromBadge(string removeDoorName, int badgeID)
+        {
+            Badge deleteDoor = GetBadgeByID(badgeID);
+
+            if (GetDoorsByList(badgeID) == null)
             {
                 return false;
             }
 
+            foreach(string door in deleteDoor.DoorNames)
+            {
+                if (door == removeDoorName)
+                {
+                deleteDoor.DoorNames.Remove(removeDoorName);
+                return true;
+
+                }
+            }
+            return false;
+
+        // Get Badge by ID
         }
-
-
-        // Helper Method - - - - - - Get Badge List By Door List
-
         public Badge GetBadgeByID(int badgeID)
         {
             foreach (Badge badge in badgeDictionary.Values)
@@ -56,46 +100,15 @@ namespace ChallengeThree_Console
         }
 
 
-
-        //Delete Doors on Existing Badge (I DONT KNOW HOW TO PUT THE DICTIONARY IN HERE!!!)
-        public bool DeleteAllDoorsFromBadge(int badgeID)
-        {
-            Badge badge = GetBadgeByID(badgeID);
-            if (badge.DoorNames == null)
-            {
-                return false;
-            }
-            return true;
-        }
-
-
-
-
-        ////Display Badges -- DONT NEED ANYMORE
-        //public void DisplayBadges()
-        //{
-        //    Badge badgesToDisplay = new Badge();
-        //    foreach (KeyValuePair<int, Badge> Badge in badgeDictionary)
-        //    {
-        //        Console.WriteLine($"{Badge.Key} - {Badge.Value}");
-        //    }
-        //}
-
-
-        //View All Badge Numbers & Door Access
-
-        public List<Badge> ViewAll()
-        {
-            List<Badge> listOfBadges = new List<Badge>();
-            foreach (KeyValuePair<int, Badge> badge in badgeDictionary)
-            {
-                listOfBadges.Add(badge.Value);
-            }
-            return listOfBadges;
-
-        }
     }
 }
+
+
+
+
+
+
+
 
 
 

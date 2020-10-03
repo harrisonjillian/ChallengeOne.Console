@@ -22,7 +22,7 @@ namespace ChallengeTwo_Console
 
         public DateTime IncidentDate { get; set; }
 
-        public DateTime ClaimDate { get; set; }
+        public DateTime ClaimDate{ get; set; } 
 
         public bool IsValid { get; set; }
 

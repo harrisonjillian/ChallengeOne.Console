@@ -59,7 +59,7 @@ namespace ChallengeThree_Console
 
         }
 
-        public void AddBadgeToList()
+        private void AddBadgeToList()
         {
 
             Badge addBadge = new Badge();
@@ -96,61 +96,73 @@ namespace ChallengeThree_Console
 
         }
 
-        public void UpdateBadge()
+        private void UpdateBadge()
         {
 
             ViewAllBadges();
 
             Console.WriteLine("Enter the badge ID you would like to update:");
-            string oldBadgeID = Console.ReadLine();
+            int olderBadge = int.Parse(Console.ReadLine());
 
-            Badge newDoorAccess = new Badge();
             Console.WriteLine("What would you like to do? \n" +
                 "1. Remove a door. \n" +
                 "2. Add a door");
-            string newDoorAccessInput = Console.ReadLine();
-           _badgeRepo.UpdateDoorOnBadge(newDoorAccess.BadgeID, newDoorAccess.DoorNames);
+            string doorAccessInput = Console.ReadLine();
 
-            if (oldBadgeID == "y")
+            if (doorAccessInput == "1")
             {
-                Console.WriteLine("Which door would you like to remove?");
-                string doorInput = Console.ReadLine();
 
-                List<string> doorNames = new List<string>();
-                foreach (string name in doorNames)
+                Console.WriteLine("Enter the door you would like removed.");
+                string removeDoor = Console.ReadLine();
+
+                if (_badgeRepo.DeleteDoorFromBadge(removeDoor, olderBadge) == true)
                 {
-                    Console.WriteLine($"Door Names: {doorNames}");
+
+                    Console.WriteLine("Door has been removed from the badge");
                 }
-                Console.WriteLine($"Thank you, {newDoorAccess.BadgeID} now only has access to {newDoorAccess.DoorNames}");
+                else 
+                {
+                    Console.WriteLine("Does not recognize door or badge. Please re-enter.");
+                }
             }
 
-
-
-
-
-            else
+            else if (doorAccessInput == "2")
             {
                 Console.WriteLine("Which door would you like to add?");
-                // newDoorAccess.DoorNames = Console.ReadLine();
-                Console.WriteLine($"Thank you, {newDoorAccess.BadgeID} now has additional access.  Doors accessed are {newDoorAccess.DoorNames}");
+                string addDoor = Console.ReadLine();
+
+                if (_badgeRepo.AddDoorToBadge(addDoor, olderBadge) == true)
+                {
+                    Console.WriteLine("Door has been added");
+                }
+                else
+                {
+                    Console.WriteLine("Does not recognize the badge. Please re-enter.");
+                }
+
+            }
+            else
+            {
+                Console.WriteLine("Please enter a valid option");
             }
 
-
+          
 
         }
 
-        public void ViewAllBadges()
+        private void ViewAllBadges()
         {
-            List<Badge> listOfBadges = _badgeRepo.ViewAll();
-            foreach (Badge badge in listOfBadges)
+
+            foreach (Badge badge in _badgeRepo.ViewAll())
             {
-                Console.WriteLine($"Badge ID: {badge.BadgeID}");
+                Console.WriteLine($"Badge ID: {badge.BadgeID} Last Name: {badge.BadgeName}");
+                foreach (string door in badge.DoorNames)
+                {
+                    Console.WriteLine($"Door: {door} \t");
+                }
+                Console.WriteLine();
             }
-            List<string> doorNames = new List<string>();
-            foreach (string name in doorNames)
-            {
-                Console.WriteLine($"Door Names: {doorNames}");
-            }
+
 
         }
 
@@ -159,7 +171,7 @@ namespace ChallengeThree_Console
 
             _badgeRepo.AddNewBadgeToList(2550, new Badge(2250, new List<string>() { "A5", "B23", "C198" }, "Wallace"));
             _badgeRepo.AddNewBadgeToList(4567, new Badge(4567, new List<string>() { "B5", "C23", "D293" }, "Smith"));
-            _badgeRepo.AddNewBadgeToList(8895, new Badge(8895, new List<string>() { "G3", "A56", "D293" }, "Phillips"));
+            _badgeRepo.AddNewBadgeToList(8895, new Badge(8895, new List<string>() { "G3", "A56", "D293", "E54" }, "Phillips"));
 
         }
     }

@@ -38,12 +38,12 @@ namespace ChallengeTwo_Console
                         _claimRepo.SeeAllClaimInformation();
                         break;
 
-
-
                     case "2":
+                        Console.Clear();
                         Claim nextClaim= _claimRepo.GetNextClaim();
-                        Console.WriteLine($"{nextClaim.ClaimAmount}, {nextClaim.ClaimDate}, {nextClaim.ClaimDescription}, {nextClaim.ClaimID}, {nextClaim.IncidentDate}, {nextClaim.IsValid}, {nextClaim.TypeOfClaim}");
-                        Console.WriteLine("Do you want to take care of this claim now?");
+                        Console.WriteLine($" Current claim in Queue: \n {nextClaim.ClaimAmount}, {nextClaim.ClaimDate}, {nextClaim.ClaimDescription}, {nextClaim.ClaimID}, {nextClaim.IncidentDate}, {nextClaim.IsValid}, {nextClaim.TypeOfClaim}");
+                        Console.WriteLine("\n");
+                        Console.WriteLine("Do you want to take care of this claim now? (yes or no)");
                         string answer = Console.ReadLine().ToLower();
                         if (answer == "yes")
                         {
@@ -52,16 +52,15 @@ namespace ChallengeTwo_Console
                         }
                         else
                         {
-                            Console.WriteLine("Claim could not be deleted and you cannot move to next item in queue.");
+                            Console.WriteLine("Claim could not be deleted and you cannot move to next item in queue. Press any key to return to main menu.");
                         }
-
-
                         break;
+
                     case "3":
                         CreateNewClaim();
                         break;
                     case "4":
-                        Console.WriteLine("Goodbye");
+                        Console.WriteLine("Goodbye!");
                         keepRunning = false;
                         break;
                     default:
@@ -73,15 +72,12 @@ namespace ChallengeTwo_Console
             }
         }
 
-        public void CreateNewClaim()
+        private void CreateNewClaim()
         {
             Claim claim = new Claim();
 
-
             Console.WriteLine("Enter the claim ID:");
             claim.ClaimID = int.Parse(Console.ReadLine());
-
-
 
             Console.WriteLine("Enter the claim type: \n" +
                 "1. Car \n" +
@@ -91,8 +87,6 @@ namespace ChallengeTwo_Console
             string claimAsString = Console.ReadLine();
             int claimAsInt = int.Parse(claimAsString);
             claim.TypeOfClaim = (ClaimType)claimAsInt;
-
-
 
             Console.WriteLine("Enter the claim description: ");
             claim.ClaimDescription = Console.ReadLine();
@@ -122,14 +116,6 @@ namespace ChallengeTwo_Console
 
         }
 
-
-
-
-
-        //when a claims agent needs to deal with an item they see the next item in the queue.
-        //Do you want to deal with this claim now?
-        //If yes, claim will be pulled off the top of the queue
-        //if no, it will go back to main menu
 
 
         private void SeedClaims()

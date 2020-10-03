@@ -1,4 +1,4 @@
-﻿using System; 
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,19 +8,19 @@ namespace ChallengeOne_Console
 {
     class ProgramUI
     {
-        private MenuRepository _menuRepository = new MenuRepository();  
+        MenuRepository _menuRepository = new MenuRepository();
 
         public void Run()
         {
             SeedMenuItems();
             Menu();
-            
+
         }
 
         private void Menu()
         {
             bool keepRunning = true;
-            while (keepRunning) 
+            while (keepRunning)
             {
                 Console.WriteLine("Choose a selection: \n" +
                     "1. Add Menu Items to Menu List \n" +
@@ -79,7 +79,7 @@ namespace ChallengeOne_Console
             newMenuItem.Price = decimal.Parse(mealPriceAsString);
 
 
-            //Ingredient List - come back to this.
+            //Ingredient List 
             Console.WriteLine("Enter the ingredient list:");
 
 
@@ -92,7 +92,7 @@ namespace ChallengeOne_Console
             }
 
             Console.WriteLine("Enter the meal number:");
-            string mealNumberAsString =  Console.ReadLine();
+            string mealNumberAsString = Console.ReadLine();
             newMenuItem.MealNumber = int.Parse(mealNumberAsString);
 
             _menuRepository.CreateNewMenuItems(newMenuItem);
@@ -117,7 +117,7 @@ namespace ChallengeOne_Console
                 Console.WriteLine("The meal was not able to be deleted.");
             }
 
-           
+
 
         }
 
@@ -126,20 +126,27 @@ namespace ChallengeOne_Console
             Console.Clear();
             List<Menu> _menuItems = _menuRepository.ViewMenuItems();
 
-            foreach(Menu menu in _menuItems)
+            foreach (Menu menu in _menuItems)
             {
                 Console.WriteLine($"Menu Name: {menu.MealName} \n" +
-                    $"Menu Description: {menu.MealDescription}");
+                    $"Menu Description: {menu.MealDescription} \n" +
+                    $"Price: {menu.Price} \n" +
+                    $"Meal Number: {menu.MealNumber}");
+
+                Console.WriteLine("\n");
             }
         }
 
+
+
+
+
+
         private void SeedMenuItems()
         {
-            Menu PretzelBaconHamburger = new Menu("Pretzel Bacon Hamburger", "Deliciously fresh quarter pounder with all the right toppings", 5.50m, new List<String> {"beef", "cheese sauce", "bacon", "honey mustard\n" +
-                "fried onions", "pickles"}, 1);
+            Menu PretzelBaconHamburger = new Menu("Pretzel Bacon Hamburger", "Deliciously fresh quarter pounder with all the right toppings", 5.50m, new List<String> { "beef", "cheese sauce", "bacon", "honey mustard", "fried onions", "pickles" }, 1);
 
-            Menu DoubleStackHamburger = new Menu("Double Stack Burger", "Two beef patties stacked with all the toppings", 5.00m, new List<String> { "beef", "cheese", "ketchup", "mustard", "pickles", "tomatoes\n" +
-                "onion"}, 2);
+            Menu DoubleStackHamburger = new Menu("Double Stack Burger", "Two beef patties stacked with all the toppings", 5.00m, new List<String> { "beef", "cheese", "ketchup", "mustard", "pickles", "tomatoes", "onion" }, 2);
 
             Menu GrilledChickenSandwich = new Menu("Grilled Chicken Sandwich", "Herb Roasted Chicken Sandwich", 5.75m, new List<string> { "chicken", "mustard", "spring mix", "tomato" }, 3);
 
@@ -147,7 +154,7 @@ namespace ChallengeOne_Console
             _menuRepository.CreateNewMenuItems(DoubleStackHamburger);
             _menuRepository.CreateNewMenuItems(GrilledChickenSandwich);
         }
-       
+
     }
 }
 
