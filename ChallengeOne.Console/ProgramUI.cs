@@ -81,15 +81,10 @@ namespace ChallengeOne_Console
 
             //Ingredient List 
             Console.WriteLine("Enter the ingredient list:");
-
-
+            
             string ingredientInput = Console.ReadLine();
-
-            List<Menu> listOfIngredients = new List<Menu>();
-            foreach (Menu item in listOfIngredients)
-            {
-                Console.WriteLine(item);
-            }
+            newMenuItem.Ingredients = ingredientInput.Split(',').ToList();
+ 
 
             Console.WriteLine("Enter the meal number:");
             string mealNumberAsString = Console.ReadLine();
@@ -125,13 +120,18 @@ namespace ChallengeOne_Console
         {
             Console.Clear();
             List<Menu> _menuItems = _menuRepository.ViewMenuItems();
-
             foreach (Menu menu in _menuItems)
             {
                 Console.WriteLine($"Menu Name: {menu.MealName} \n" +
                     $"Menu Description: {menu.MealDescription} \n" +
                     $"Price: {menu.Price} \n" +
-                    $"Meal Number: {menu.MealNumber}");
+                    $"Meal Number: {menu.MealNumber} \n");
+                foreach (string ingredients in menu.Ingredients)
+                {
+                    Console.WriteLine($"Ingredients: {ingredients}");
+                }
+
+
 
                 Console.WriteLine("\n");
             }

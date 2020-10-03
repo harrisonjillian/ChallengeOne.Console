@@ -35,13 +35,17 @@ namespace ChallengeTwo_Console
                 {
                     case "1":
                         Console.Clear();
-                        _claimRepo.SeeAllClaimInformation();
+                        Queue<Claim> claimList = _claimRepo.GetAllClaims();
+                        foreach (Claim claim in claimList)
+                        {
+                            Console.WriteLine($"{claim.ClaimID}, {claim.TypeOfClaim}, {claim.ClaimDescription}, {claim.ClaimAmount}, {claim.IncidentDate}, {claim.ClaimDate}, {claim.IsValid}");
+                        }
                         break;
 
                     case "2":
                         Console.Clear();
-                        Claim nextClaim= _claimRepo.GetNextClaim();
-                        Console.WriteLine($" Current claim in Queue: \n {nextClaim.ClaimAmount}, {nextClaim.ClaimDate}, {nextClaim.ClaimDescription}, {nextClaim.ClaimID}, {nextClaim.IncidentDate}, {nextClaim.IsValid}, {nextClaim.TypeOfClaim}");
+                        Claim nextClaim = _claimRepo.GetNextClaim();
+                        Console.WriteLine($" Current claim in Queue: \n {nextClaim.ClaimAmount}, {nextClaim.ClaimDate.ToString("d")}, {nextClaim.ClaimDescription}, {nextClaim.ClaimID}, {nextClaim.IncidentDate}, {nextClaim.IsValid}, {nextClaim.TypeOfClaim}");
                         Console.WriteLine("\n");
                         Console.WriteLine("Do you want to take care of this claim now? (yes or no)");
                         string answer = Console.ReadLine().ToLower();
@@ -72,6 +76,7 @@ namespace ChallengeTwo_Console
             }
         }
 
+
         private void CreateNewClaim()
         {
             Claim claim = new Claim();
@@ -100,17 +105,19 @@ namespace ChallengeTwo_Console
             Console.WriteLine("Enter the claim date:");
             claim.ClaimDate = DateTime.Parse(Console.ReadLine());
 
-            Console.WriteLine("Is the claim valid (y/n)");
-            string claimValidity = Console.ReadLine().ToLower();
-            if (claimValidity == "y")
-            {
-                claim.IsValid = true;
-       
-            }
-            else
-            {
-                claim.IsValid = false;
-            }
+            //Console.WriteLine("Is the claim valid (y/n)");
+
+            //string claimValidity = Console.ReadLine().ToLower();
+
+            //if (claimValidity ==  "y")
+            //{
+            //    claim.IsValid = true;
+
+            //}
+            //else
+            //{
+            //    claim.IsValid = false;
+            //}
 
             _claimRepo.AddNewClaims(claim);
 
@@ -122,9 +129,9 @@ namespace ChallengeTwo_Console
         {
 
 
-            Claim ClaimOne = new Claim(1, "Car accident on 465", 400.00m, new DateTime(2018, 04, 25), new DateTime(2018, 04, 27), true, ClaimType.Car);
-            Claim ClaimTwo = new Claim(2, "House fire in kitchen", 4000.00m, new DateTime(2018, 04, 11), new DateTime(2018, 04, 12), true, ClaimType.Home);
-            Claim ClaimThree = new Claim(3, "Stolen pancakes", 4.00m, new DateTime(2018, 04, 27), new DateTime(2018, 06, 18), false, ClaimType.Theft);
+            Claim ClaimOne = new Claim(1, "Car accident on 465", 400.00m, new DateTime(2018, 04, 25), new DateTime(2018, 04, 27), ClaimType.Car);
+            Claim ClaimTwo = new Claim(2, "House fire in kitchen", 4000.00m, new DateTime(2018, 04, 11), new DateTime(2018, 04, 12), ClaimType.Home);
+            Claim ClaimThree = new Claim(3, "Stolen pancakes", 4.00m, new DateTime(2018, 04, 27), new DateTime(2018, 06, 18), ClaimType.Theft);
 
             _claimRepo.AddNewClaims(ClaimOne);
             _claimRepo.AddNewClaims(ClaimTwo);

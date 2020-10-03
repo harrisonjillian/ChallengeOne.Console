@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ChallengeTwo_Console
 {
-        public enum ClaimType
-        {
-            Car =1,
-            Home,
-            Theft
-        }
+    public enum ClaimType
+    {
+        Car = 1,
+        Home,
+        Theft
+    }
     public class Claim
     {
         public int ClaimID { get; set; }
@@ -22,7 +22,7 @@ namespace ChallengeTwo_Console
 
         public DateTime IncidentDate { get; set; }
 
-        public DateTime ClaimDate{ get; set; } 
+        public DateTime ClaimDate { get; set; }
 
         public bool IsValid { get; set; }
 
@@ -34,17 +34,15 @@ namespace ChallengeTwo_Console
 
         }
 
-        public Claim(int claimID, string claimDescription, decimal claimAmount, DateTime incidentDate, DateTime claimDate, bool isValid, ClaimType typeOfClaim)
+        public Claim(int claimID, string claimDescription, decimal claimAmount, DateTime incidentDate, DateTime claimDate, ClaimType typeOfClaim)
         {
             ClaimID = claimID;
             ClaimDescription = claimDescription;
             ClaimAmount = claimAmount;
             IncidentDate = incidentDate;
             ClaimDate = claimDate;
-            IsValid = isValid;
+            IsValid = (claimDate - incidentDate).Days <= 30;
             TypeOfClaim = typeOfClaim;
-            
-
         }
 
 

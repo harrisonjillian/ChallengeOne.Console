@@ -15,7 +15,7 @@ namespace TestChallengeTwo
             //Arrange
 
             ClaimRepository _repo = new ClaimRepository();
-            Claim newClaim = new Claim(024564, "Car Accident", 1000.50m, new DateTime(2000, 8, 29), new DateTime(2000, 9, 14), true, ClaimType.Car);
+            Claim newClaim = new Claim(024564, "Car Accident", 1000.50m, new DateTime(2000, 8, 29), new DateTime(2000, 9, 14), ClaimType.Car);
 
             //Act
 
@@ -35,7 +35,7 @@ namespace TestChallengeTwo
 
             //Arrange
             ClaimRepository _repo = new ClaimRepository();
-            Claim newClaim = new Claim(024564, "Car Accident", 1000.50m, new DateTime(2000, 8, 29), new DateTime(2000, 9, 14), true, ClaimType.Car);
+            Claim newClaim = new Claim(024564, "Car Accident", 1000.50m, new DateTime(2000, 8, 29), new DateTime(2000, 9, 14), ClaimType.Car);
             _repo.AddNewClaims(newClaim);
 
             //Act
@@ -54,7 +54,7 @@ namespace TestChallengeTwo
             //Arrange
 
             ClaimRepository _repo = new ClaimRepository();
-            Claim newClaim = new Claim(024564, "Car Accident", 1000.50m, new DateTime(2000, 8, 29), new DateTime(2000, 9, 14), true, ClaimType.Car);
+            Claim newClaim = new Claim(024564, "Car Accident", 1000.50m, new DateTime(2000, 8, 29), new DateTime(2000, 9, 14), ClaimType.Car);
             _repo.AddNewClaims(newClaim);
 
             //Act
@@ -71,32 +71,13 @@ namespace TestChallengeTwo
 
         [TestMethod]
 
-        public void ViewNewClaimsAndReturnClaimList()  //SeeAllClaims
-        {
-
-            //Arrange
-
-            ClaimRepository _repo = new ClaimRepository();
-            Claim newClaim = new Claim(024564, "Car Accident", 1000.50m, new DateTime(2000, 8, 29), new DateTime(2000, 9, 14), true, ClaimType.Car);
-            _repo.AddNewClaims(newClaim);
-
-            //Act
-
-            Claim seeClaims = _repo.SeeAllClaimInformation();
-
-            //Assert
-
-            Assert.AreEqual(1, seeClaims);
-
-        }
-
         public void ReceiveAllClaims()  //GetAllClaims
         {
 
             //Arrange
 
             ClaimRepository _repo = new ClaimRepository();
-            Claim newClaim = new Claim(024564, "Car Accident", 1000.50m, new DateTime(2000, 8, 29), new DateTime(2000, 9, 14), true, ClaimType.Car);
+            Claim newClaim = new Claim(024564, "Car Accident", 1000.50m, new DateTime(2000, 8, 29), new DateTime(2000, 9, 14), ClaimType.Car);
             _repo.AddNewClaims(newClaim);
 
             //Act
@@ -105,7 +86,7 @@ namespace TestChallengeTwo
 
             //Assert
 
-            Assert.AreEqual(1, seeAllClaims);
+            Assert.AreEqual(1, seeAllClaims.Count);
 
         }
 
@@ -115,7 +96,7 @@ namespace TestChallengeTwo
             //Arrange
 
             ClaimRepository _repo = new ClaimRepository();
-            Claim newClaim = new Claim(024564, "Car Accident", 1000.50m, new DateTime(2000, 8, 29), new DateTime(2000, 9, 14), true, ClaimType.Car);
+            Claim newClaim = new Claim(024564, "Car Accident", 1000.50m, new DateTime(2000, 8, 29), new DateTime(2000, 9, 14), ClaimType.Car);
             _repo.AddNewClaims(newClaim);
 
             //Act
@@ -124,7 +105,7 @@ namespace TestChallengeTwo
 
             //Assert
 
-            Assert.AreEqual(1000.50, getClaim.ClaimAmount);
+            Assert.AreEqual(1000.50m, getClaim.ClaimAmount);
         }
 
 
@@ -134,12 +115,12 @@ namespace TestChallengeTwo
 
             //Arrange
             ClaimRepository _repo = new ClaimRepository();
-            Claim newClaim = new Claim(024564, "Car Accident", 1000.50m, new DateTime(2000, 8, 29), new DateTime(2000, 9, 14), true, ClaimType.Car);
+            Claim newClaim = new Claim(024564, "Car Accident", 1000.50m, new DateTime(2000, 8, 29), new DateTime(2000, 9, 14), ClaimType.Car);
             _repo.AddNewClaims(newClaim);
 
 
             //Act
-            bool claimUpdate = _repo.UpdateClaimsByClaimID(024564, "Car Accident", 1000.50m, new DateTime(2000, 8, 29), new DateTime(2000, 9, 14), true, ClaimType.Car);
+            bool claimUpdate = _repo.UpdateClaimsByClaimID(024564, "Car Accident", 1000.50m, new DateTime(2000, 8, 29), new DateTime(2000, 9, 14), ClaimType.Car);
 
             //Assert
             Assert.AreEqual(true, claimUpdate);

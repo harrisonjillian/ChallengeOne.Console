@@ -34,15 +34,7 @@ namespace ChallengeTwo_Console
         }
 
 
-        //See All Claim Information
-        public Claim SeeAllClaimInformation()
-        {
-            foreach (Claim claim in _claims)
-            {
-                Console.WriteLine($"{claim.ClaimID}, {claim.TypeOfClaim}, {claim.ClaimDescription}, {claim.ClaimAmount}, {claim.IncidentDate}, {claim.ClaimDate}, {claim.IsValid} \n");
-            }
-            return null;
-        }
+        
 
         // Get All Claims
         public Queue<Claim> GetAllClaims()
@@ -63,7 +55,7 @@ namespace ChallengeTwo_Console
         }
 
         // UpdateClaimsbyClaim ID
-        public bool UpdateClaimsByClaimID(int claimID, string claimDescription, decimal claimAmount, DateTime incidentDate, DateTime claimDate, bool isValid, ClaimType typeOfClaim)
+        public bool UpdateClaimsByClaimID(int claimID, string claimDescription, decimal claimAmount, DateTime incidentDate, DateTime claimDate, ClaimType typeOfClaim)
         {
             Claim newClaimToBeUpdated = GetClaimsByClaimID(claimID);
 
@@ -74,7 +66,6 @@ namespace ChallengeTwo_Console
                 newClaimToBeUpdated.ClaimAmount = claimAmount;
                 newClaimToBeUpdated.IncidentDate = incidentDate;
                 newClaimToBeUpdated.ClaimDate = claimDate;
-                newClaimToBeUpdated.IsValid = isValid;
                 newClaimToBeUpdated.TypeOfClaim = typeOfClaim;
 
                 return true;
@@ -84,16 +75,6 @@ namespace ChallengeTwo_Console
                 return false;
             }
         }
-
-
-
-
-
-
-
-
-
-
     }
 }
 
